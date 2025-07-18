@@ -18,7 +18,14 @@ import com.example.demo.service.StudentService;
 
 @RestController
 @RequestMapping("/api/students")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(
+	    origins = {
+	            "https://student-mf-gukr.vercel.app",
+	            "http://localhost:4200"
+	        },
+	        allowCredentials = "true"
+	    )
+
 
 public class StudentController {
 	 @Autowired
