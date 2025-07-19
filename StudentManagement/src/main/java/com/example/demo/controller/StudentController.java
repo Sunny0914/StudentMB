@@ -3,40 +3,34 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
 
-
 @RestController
 @RequestMapping("/api/students")
-@CrossOrigin(origins = "http://localhost:4200")
-
+@CrossOrigin(origins = "http://localhost:4200") // Allows Angular frontend to access this API
 public class StudentController {
-	 @Autowired
-	    private StudentService service;
 
-	    @GetMapping
-	    public List<Student> getAll() {
-	        return service.getAllStudents();
-	    }
+    @Autowired
+    private StudentService service;
 
-	    @PostMapping
-	    public Student create(@RequestBody Student student) {
-	        return service.saveStudent(student);
-	    }
+    // Get all students
+    @GetMapping
+    public List<Student> getAllStudents() {
+        return service.getAllStudents();
+    }
 
-	    @DeleteMapping("/{id}")
-	    public void delete(@PathVariable Long id) {
-	        service.deleteStudent(id);
-	    }
+    // Create a new student
+    @PostMapping
+    public Student createStudent(@RequestBody Student student) {
+        return service.saveStudent(student);
+    }
 
+    // Delete a student by ID
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable Long id) {
+        service.deleteStudent(id);
+    }
 }
